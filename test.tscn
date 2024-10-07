@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpsra33or1836"]
+
+[ext_resource type="PackedScene" uid="uid://bc6l2kcpu1cs6" path="res://player.tscn" id="1_gxa8d"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_gxa8d")]
+position = Vector2(119, 88)
+SPEED = 75.0
