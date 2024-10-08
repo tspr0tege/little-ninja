@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export var SPEED = 65.0
+var knockback = Vector2.ZERO
 @onready var screen_size = get_viewport_rect().size
 @onready var action_timer: Timer = $"Action Timer"
 const STICK = preload("res://weapons/stick/stick.tscn")
@@ -48,6 +49,11 @@ func _physics_process(_delta):
 		var currentDirection = $AnimatedSprite2D.animation.split("-")[-1]
 		$AnimatedSprite2D.play("idle-" + currentDirection)
 		
+	if knockback.length() > .1:
+		#print(str(knockback))
+		velocity += knockback
+		knockback = lerp(knockback, Vector2.ZERO, 0.175)
+	
 	position.x = clamp(position.x, 0, screen_size.x)
 	position.y = clamp(position.y, 0, screen_size.y)
 	

@@ -1,7 +1,14 @@
-[gd_scene load_steps=30 format=3 uid="uid://bc6l2kcpu1cs6"]
+[gd_scene load_steps=36 format=3 uid="uid://bc6l2kcpu1cs6"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_0uojr"]
 [ext_resource type="Texture2D" uid="uid://clx0bdm4c741c" path="res://entities/player/ninja-blue.png" id="1_todli"]
+[ext_resource type="Shader" uid="uid://ctvow75kcvav5" path="res://components/shaders/hit_flash.tres" id="2_2gw8s"]
+[ext_resource type="PackedScene" uid="uid://c42kjrj0yo3vh" path="res://components/nodes/hp_node.tscn" id="3_om8oq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4ayc6"]
+shader = ExtResource("2_2gw8s")
+shader_parameter/is_hit = false
+shader_parameter/tint = Color(1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nkgf1"]
 atlas = ExtResource("1_todli")
@@ -241,11 +248,49 @@ height = 13.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4tweg"]
 size = Vector2(12, 3)
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="Animation" id="Animation_o0aym"]
+resource_name = "hit_flash"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/is_hit")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_5qqtk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/is_hit")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yl16s"]
+_data = {
+"RESET": SubResource("Animation_5qqtk"),
+"hit_flash": SubResource("Animation_o0aym")
+}
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 z_index = 100
 script = ExtResource("1_0uojr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_4ayc6")
 sprite_frames = SubResource("SpriteFrames_teryn")
 animation = &"attack-down"
 
@@ -265,5 +310,13 @@ debug_color = Color(0.333333, 1, 0, 0.419608)
 [node name="Action Timer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
+
+[node name="HP_node" parent="." instance=ExtResource("3_om8oq")]
+hitPoints = 10
+
+[node name="HitFlash" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_yl16s")
+}
 
 [connection signal="timeout" from="Action Timer" to="." method="_on_action_timer_timeout"]

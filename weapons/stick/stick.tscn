@@ -65,7 +65,7 @@ libraries = {
 }
 
 [node name="DMG_node" parent="." instance=ExtResource("3_a7ylo")]
-knockbackStrength = 200.0
+knockbackStrength = 150.0
 
 [connection signal="body_entered" from="Sprite2D/Area2D" to="." method="_on_collision_detected"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
