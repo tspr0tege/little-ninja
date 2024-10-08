@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://c42kjrj0yo3vh"]
+
+[ext_resource type="Script" path="res://components/scripts/hp_node.gd" id="1_2vrw2"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j2nur"]
+resource_local_to_scene = true
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 50.0
+initial_velocity_max = 80.0
+radial_velocity_min = 90.0
+radial_velocity_max = 90.0
+gravity = Vector3(0, 0, 0)
+scale_max = 2.0
+
+[node name="HP_node" type="Node"]
+script = ExtResource("1_2vrw2")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_j2nur")
+lifetime = 0.1
+one_shot = true
+speed_scale = 0.5
+explosiveness = 1.0
+local_coords = true

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxnlyoco77xsx"
-path="res://.godot/imported/Sprite.png-d6692e0a5e90a8d3352a67a5ab76a3ce.ctex"
+uid="uid://clx0bdm4c741c"
+path="res://.godot/imported/ninja-blue.png-654249ceba46f6ac65b8579e35453826.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/Sprite.png"
-dest_files=["res://.godot/imported/Sprite.png-d6692e0a5e90a8d3352a67a5ab76a3ce.ctex"]
+source_file="res://entities/player/ninja-blue.png"
+dest_files=["res://.godot/imported/ninja-blue.png-654249ceba46f6ac65b8579e35453826.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clx0bdm4c741c"
-path="res://.godot/imported/ninja-blue.png-37ef6b022de9e1fe02caf429c2929428.ctex"
+uid="uid://dqlptptbfbcw7"
+path="res://.godot/imported/SpriteInHand.png-7380cb2d1e19ca6f5a61ef37479dace4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/ninja-blue.png"
-dest_files=["res://.godot/imported/ninja-blue.png-37ef6b022de9e1fe02caf429c2929428.ctex"]
+source_file="res://weapons/stick/SpriteInHand.png"
+dest_files=["res://.godot/imported/SpriteInHand.png-7380cb2d1e19ca6f5a61ef37479dace4.ctex"]
 
 [params]
 

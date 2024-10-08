@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmlmylke10jns"]
+
+[ext_resource type="Script" path="res://components/scripts/dmg_node.gd" id="1_w3d40"]
+
+[node name="DMG_node" type="Node"]
+script = ExtResource("1_w3d40")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=30 format=3 uid="uid://bc6l2kcpu1cs6"]
 
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_0uojr"]
-[ext_resource type="Texture2D" uid="uid://clx0bdm4c741c" path="res://sprites/ninja-blue.png" id="1_todli"]
+[ext_resource type="Script" path="res://entities/player/player.gd" id="1_0uojr"]
+[ext_resource type="Texture2D" uid="uid://clx0bdm4c741c" path="res://entities/player/ninja-blue.png" id="1_todli"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nkgf1"]
 atlas = ExtResource("1_todli")
@@ -242,22 +242,25 @@ height = 13.0
 size = Vector2(12, 3)
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 100
 script = ExtResource("1_0uojr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_teryn")
 animation = &"attack-down"
 
-[node name="HitBox" type="CollisionShape2D" parent="."]
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+light_mask = 4
+visibility_layer = 4
 position = Vector2(0, 1.5)
 shape = SubResource("CapsuleShape2D_c7s31")
 
 [node name="FootBox" type="CollisionShape2D" parent="."]
-light_mask = 0
-visibility_layer = 0
 position = Vector2(0, 6.5)
 shape = SubResource("RectangleShape2D_4tweg")
-debug_color = Color(0.913725, 0, 0, 0.419608)
+debug_color = Color(0.333333, 1, 0, 0.419608)
 
 [node name="Action Timer" type="Timer" parent="."]
 wait_time = 0.2

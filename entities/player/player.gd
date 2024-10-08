@@ -3,7 +3,7 @@ extends CharacterBody2D
 @export var SPEED = 65.0
 @onready var screen_size = get_viewport_rect().size
 @onready var action_timer: Timer = $"Action Timer"
-const STICK = preload("res://weapons/stick.tscn")
+const STICK = preload("res://weapons/stick/stick.tscn")
 const attackInstantiationPoint = {
 	"up": {
 		"position": Vector2(-3, -4),
@@ -62,6 +62,8 @@ func _physics_process(_delta):
 		$AnimatedSprite2D.play("attack-" + currentDirection)
 		
 		var ATTACK = STICK.instantiate()
+		if currentDirection == "up":
+			ATTACK.z_index = -1
 		ATTACK.rotation = deg_to_rad(attackInstantiationPoint[currentDirection].rotation)
 		ATTACK.position = attackInstantiationPoint[currentDirection].position
 		add_child(ATTACK)

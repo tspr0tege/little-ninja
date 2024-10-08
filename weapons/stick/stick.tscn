@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cse04w0axmxlg"]
+[gd_scene load_steps=8 format=3 uid="uid://cse04w0axmxlg"]
 
-[ext_resource type="Script" path="res://stick.gd" id="1_hnap0"]
-[ext_resource type="Texture2D" uid="uid://dqlptptbfbcw7" path="res://sprites/SpriteInHand.png" id="2_fw8dd"]
+[ext_resource type="Script" path="res://weapons/stick/stick.gd" id="1_sniua"]
+[ext_resource type="Texture2D" uid="uid://dqlptptbfbcw7" path="res://weapons/stick/SpriteInHand.png" id="2_xk0x1"]
+[ext_resource type="PackedScene" uid="uid://dmlmylke10jns" path="res://components/nodes/dmg_node.tscn" id="3_a7ylo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a2atx"]
 size = Vector2(2, 11)
@@ -44,10 +45,10 @@ _data = {
 }
 
 [node name="Stick" type="Node2D"]
-script = ExtResource("1_hnap0")
+script = ExtResource("1_sniua")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_fw8dd")
+texture = ExtResource("2_xk0x1")
 offset = Vector2(0, 6)
 
 [node name="Area2D" type="Area2D" parent="Sprite2D"]
@@ -63,4 +64,8 @@ libraries = {
 "": SubResource("AnimationLibrary_64xmg")
 }
 
+[node name="DMG_node" parent="." instance=ExtResource("3_a7ylo")]
+knockbackStrength = 200.0
+
+[connection signal="body_entered" from="Sprite2D/Area2D" to="." method="_on_collision_detected"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
