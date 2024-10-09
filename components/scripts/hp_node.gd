@@ -3,6 +3,7 @@ extends Node
 signal damage_taken
 
 @export var hitPoints: int = 5
+@export var knockbackModifier: float = 1
 @onready var ENTITY = get_parent()
 var hit_splash
 
@@ -30,7 +31,7 @@ func take_damage_from(dmg_node) -> void:
 	
 	if dmg_node.knockbackStrength > 0:
 		var knockbackDirection = dmg_node.get_parent().global_position.direction_to(ENTITY.global_position)
-		ENTITY.knockback = knockbackDirection * dmg_node.knockbackStrength
+		ENTITY.knockback = knockbackDirection * (dmg_node.knockbackStrength * knockbackModifier)
 	
 	hit_splash.restart()
 	hit_splash.emitting = true

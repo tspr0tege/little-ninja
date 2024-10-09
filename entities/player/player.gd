@@ -2,8 +2,14 @@ extends CharacterBody2D
 
 @export var SPEED = 65.0
 var knockback = Vector2.ZERO
-@onready var screen_size = get_viewport_rect().size
 @onready var action_timer: Timer = $"Action Timer"
+@onready var map: TileMapLayer = $"../Map/Layer1"
+
+var level
+var tileSize
+var leftEdge
+var topEdge
+
 const STICK = preload("res://weapons/stick/stick.tscn")
 const attackInstantiationPoint = {
 	"up": {
@@ -25,6 +31,12 @@ const attackInstantiationPoint = {
 }
 
 var in_action = false
+
+func _ready() -> void:
+	level = map.get_used_rect()
+	tileSize = map.rendering_quadrant_size	
+	leftEdge = level.position.x * tileSize
+	topEdge = level.position.y * tileSize
 
 func _physics_process(_delta):
 	
@@ -50,12 +62,11 @@ func _physics_process(_delta):
 		$AnimatedSprite2D.play("idle-" + currentDirection)
 		
 	if knockback.length() > .1:
-		#print(str(knockback))
 		velocity += knockback
 		knockback = lerp(knockback, Vector2.ZERO, 0.175)
 	
-	position.x = clamp(position.x, 0, screen_size.x)
-	position.y = clamp(position.y, 0, screen_size.y)
+	position.x = clamp(position.x, leftEdge, (level.end.x * tileSize) + leftEdge)
+	position.y = clamp(position.y, topEdge, (level.end.y * tileSize) + topEdge)
 	
 	move_and_slide()
 	
