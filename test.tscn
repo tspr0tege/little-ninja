@@ -1,15 +1,16 @@
-[gd_scene load_steps=7 format=4 uid="uid://dpsra33or1836"]
+[gd_scene load_steps=8 format=4 uid="uid://dpsra33or1836"]
 
 [ext_resource type="PackedScene" uid="uid://bc6l2kcpu1cs6" path="res://entities/player/player.tscn" id="1_gxa8d"]
 [ext_resource type="Script" path="res://camera_2d.gd" id="2_hmjvj"]
 [ext_resource type="TileSet" uid="uid://knpblldpfwtx" path="res://environments/NatureTileSet.tres" id="2_ladtl"]
 [ext_resource type="PackedScene" uid="uid://ivl4ra37gh43" path="res://entities/enemies/spirit/spirit.tscn" id="3_q771a"]
 [ext_resource type="Script" path="res://spawner.gd" id="3_ve64f"]
+[ext_resource type="PackedScene" uid="uid://dhyfsngiware2" path="res://weapons/stick/pickup.tscn" id="6_lv6lb"]
 
 [sub_resource type="Curve2D" id="Curve2D_t1vbj"]
 resource_local_to_scene = true
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -140, -90, 0, 0, 0, 0, 140, -90, 0, 0, 0, 0, 140, 90, 0, 0, 0, 0, -140, 90, 0, 0, 0, 0, -140, -90)
+"points": PackedVector2Array(0, 0, 0, 0, -150, -100, 0, 0, 0, 0, 150, -100, 0, 0, 0, 0, 150, 100, 0, 0, 0, 0, -150, 100, 0, 0, 0, 0, -150, -100)
 }
 point_count = 5
 
@@ -31,7 +32,7 @@ script = ExtResource("3_ve64f")
 enemy_to_spawn = ExtResource("3_q771a")
 
 [node name="SpawnRim" type="PathFollow2D" parent="Player/Camera2D/Spawner"]
-position = Vector2(-140, -90)
+position = Vector2(-150, -100)
 
 [node name="Timer" type="Timer" parent="Player/Camera2D/Spawner"]
 wait_time = 2.0
@@ -55,5 +56,8 @@ position = Vector2(163, 48)
 
 [node name="Spirit2" parent="." instance=ExtResource("3_q771a")]
 position = Vector2(89, 107)
+
+[node name="Pickup" parent="." instance=ExtResource("6_lv6lb")]
+position = Vector2(360, 180)
 
 [connection signal="timeout" from="Player/Camera2D/Spawner/Timer" to="Player/Camera2D/Spawner" method="_on_timer_timeout"]

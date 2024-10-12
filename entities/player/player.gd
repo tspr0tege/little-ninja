@@ -10,7 +10,11 @@ var tileSize
 var leftEdge
 var topEdge
 
-const STICK = preload("res://weapons/stick/stick.tscn")
+var weapon_in_hand = false
+var WEAPON_ATTACK: PackedScene
+var WEAPON_THROW: PackedScene
+#const STICK = preload("res://weapons/stick/swing.tscn")
+#const THROWN_STICK = preload("res://weapons/stick/throw.tscn")
 const attackInstantiationPoint = {
 	"up": {
 		"position": Vector2(-3, -4),
@@ -72,18 +76,58 @@ func _physics_process(_delta):
 	
 	# ATTACK
 	
-	if Input.is_action_just_pressed("ui_select") and not in_action:
+	if Input.is_action_just_pressed("attack") and not in_action:
 		in_action = true
 		action_timer.start()
 		var currentDirection = $AnimatedSprite2D.animation.split("-")[-1]
 		$AnimatedSprite2D.play("attack-" + currentDirection)
 		
-		var ATTACK = STICK.instantiate()
-		if currentDirection == "up":
-			ATTACK.z_index = -1
-		ATTACK.rotation = deg_to_rad(attackInstantiationPoint[currentDirection].rotation)
-		ATTACK.position = attackInstantiationPoint[currentDirection].position
-		add_child(ATTACK)
+		if weapon_in_hand:
+			var ATTACK = WEAPON_ATTACK.instantiate()
+			if currentDirection == "up":
+				ATTACK.z_index = -1
+			ATTACK.rotation = deg_to_rad(attackInstantiationPoint[currentDirection].rotation)
+			ATTACK.position = attackInstantiationPoint[currentDirection].position
+			add_child(ATTACK)
+	
+	if Input.is_action_just_pressed("ui_select") and not in_action:
+		if weapon_in_hand:
+			in_action = true
+			action_timer.start()
+			var currentDirection = $AnimatedSprite2D.animation.split("-")[-1]
+			$AnimatedSprite2D.play("attack-" + currentDirection)
+			
+			var inputDirection: Vector2 
+			if direction:
+				inputDirection = direction.normalized() 
+			else: 
+				match $AnimatedSprite2D.animation.split("-")[-1]:
+					"up":
+						inputDirection = Vector2(0, -1).normalized()
+					"down":
+						inputDirection = Vector2(0, 1).normalized()
+					"left":
+						inputDirection = Vector2(-1, 0).normalized()
+					"right":
+						inputDirection = Vector2(1, 0).normalized()
+			
+			var ATTACK = WEAPON_THROW.instantiate()
+			ATTACK.position = attackInstantiationPoint[currentDirection].position
+			add_child(ATTACK)
+			ATTACK.velocity = inputDirection * 150
+			
+			weapon_in_hand = false
+		else:			
+			var touchingEntities = $HitBox.get_overlapping_areas()
+			for entity in touchingEntities:
+				var target = entity.get_parent()
+				if target.is_in_group("pickups"):
+					#print("Picked up: %s" % [str(target.item_name)])
+					weapon_in_hand = true
+					WEAPON_ATTACK = load(target.WEAPON_ATTACK)
+					WEAPON_THROW = load(target.WEAPON_THROW)
+					target.queue_free()
+					break
 
 func _on_action_timer_timeout() -> void:
 	in_action = false
