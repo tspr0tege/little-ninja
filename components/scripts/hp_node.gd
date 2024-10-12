@@ -14,7 +14,6 @@ func _ready():
 
 func take_damage_from(dmg_node) -> void:
 	#print(str(ENTITY.name) + " taking damage!")
-	#hitPoints += change_by
 	hitPoints -= dmg_node.dmgOutput
 	
 	if ENTITY.has_node("HitFlash"):
@@ -23,11 +22,16 @@ func take_damage_from(dmg_node) -> void:
 	if hitPoints <= 0:
 		hit_splash.get_parent().remove_child(hit_splash)
 		get_tree().root.add_child(hit_splash)
+		var deathSound = $DeathSound.duplicate()
+		get_tree().root.add_child(deathSound)
 		hit_splash.position = ENTITY.global_position
 		hit_splash.process_material.scale = Vector2(2,5)
 		hit_splash.restart()
 		hit_splash.emitting = true
+		deathSound.play()
 		ENTITY.queue_free()
+	else:
+		$HitSound.play()
 	
 	if dmg_node.knockbackStrength > 0:
 		var knockbackDirection = dmg_node.get_parent().global_position.direction_to(ENTITY.global_position)

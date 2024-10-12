@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cse04w0axmxlg"]
+[gd_scene load_steps=9 format=3 uid="uid://cse04w0axmxlg"]
 
 [ext_resource type="Script" path="res://weapons/stick/swing.gd" id="1_kb7qi"]
 [ext_resource type="Texture2D" uid="uid://dqlptptbfbcw7" path="res://weapons/stick/SpriteInHand.png" id="2_3km4a"]
 [ext_resource type="PackedScene" uid="uid://dmlmylke10jns" path="res://components/nodes/dmg_node.tscn" id="3_xklja"]
+[ext_resource type="AudioStream" uid="uid://sat431pcaksq" path="res://weapons/stick/woosh 01.wav" id="4_r7ny2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a2atx"]
 size = Vector2(2, 11)
@@ -66,6 +67,11 @@ libraries = {
 
 [node name="DMG_node" parent="." instance=ExtResource("3_xklja")]
 knockbackStrength = 150.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_r7ny2")
+volume_db = 10.0
+autoplay = true
 
 [connection signal="body_entered" from="Sprite2D/Area2D" to="." method="_on_collision_detected"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
