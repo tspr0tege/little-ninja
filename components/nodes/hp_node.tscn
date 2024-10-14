@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://c42kjrj0yo3vh"]
 
 [ext_resource type="Script" path="res://components/scripts/hp_node.gd" id="1_2vrw2"]
-[ext_resource type="AudioStream" uid="uid://cmu3qqh6ainbm" path="res://Hit.wav" id="2_yce5u"]
-[ext_resource type="AudioStream" uid="uid://d2gbdrp5uwerx" path="res://Sword2.wav" id="3_x1nb8"]
+[ext_resource type="AudioStream" uid="uid://cmu3qqh6ainbm" path="res://audio/Hit.wav" id="2_yce5u"]
+[ext_resource type="AudioStream" uid="uid://d2gbdrp5uwerx" path="res://audio/Sword2.wav" id="3_x1nb8"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j2nur"]
 resource_local_to_scene = true

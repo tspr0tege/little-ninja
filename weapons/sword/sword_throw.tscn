@@ -1,0 +1,78 @@
+[gd_scene load_steps=10 format=3 uid="uid://cp107scbbj4hv"]
+
+[ext_resource type="Script" path="res://weapons/_common/weapon_throw.gd" id="1_0hi43"]
+[ext_resource type="PackedScene" uid="uid://dbqjebixfge4d" path="res://weapons/sword/sword_pickup.tscn" id="2_73fdj"]
+[ext_resource type="Texture2D" uid="uid://cqmid2o52v7hc" path="res://weapons/sword/Sprite.png" id="2_jejk7"]
+[ext_resource type="PackedScene" uid="uid://dmlmylke10jns" path="res://components/nodes/dmg_node.tscn" id="3_f5bkv"]
+[ext_resource type="AudioStream" uid="uid://c7wjn8eyaeau7" path="res://weapons/_common/woosh 02.wav" id="4_6vc4j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kib33"]
+size = Vector2(4, 14)
+
+[sub_resource type="Animation" id="Animation_vt3oh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_1j4ls"]
+resource_name = "spin"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_48lot"]
+_data = {
+"RESET": SubResource("Animation_vt3oh"),
+"spin": SubResource("Animation_1j4ls")
+}
+
+[node name="SwordThrow" type="CharacterBody2D"]
+script = ExtResource("1_0hi43")
+pickup = ExtResource("2_73fdj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_jejk7")
+
+[node name="Area2D" type="Area2D" parent="Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
+shape = SubResource("RectangleShape2D_kib33")
+debug_color = Color(1, 0, 0, 0.419608)
+
+[node name="DMG_node" parent="." instance=ExtResource("3_f5bkv")]
+dmgOutput = 8
+knockbackStrength = 180.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_48lot")
+}
+autoplay = "spin"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_6vc4j")
+pitch_scale = 1.44
+autoplay = true
+
+[connection signal="body_entered" from="Sprite2D/Area2D" to="." method="_on_collision_detected"]

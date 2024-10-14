@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://d2gbdrp5uwerx"
-path="res://.godot/imported/Sword2.wav-9f5e385d0f2a63ec40cce609d14b0bf2.sample"
+uid="uid://sat431pcaksq"
+path="res://.godot/imported/woosh 01.wav-da31646fca81abb7e630bbc1ab722379.sample"
 
 [deps]
 
-source_file="res://Sword2.wav"
-dest_files=["res://.godot/imported/Sword2.wav-9f5e385d0f2a63ec40cce609d14b0bf2.sample"]
+source_file="res://weapons/_common/woosh 01.wav"
+dest_files=["res://.godot/imported/woosh 01.wav-da31646fca81abb7e630bbc1ab722379.sample"]
 
 [params]
 

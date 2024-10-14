@@ -4,13 +4,6 @@ const SPEED = 25
 var knockback = Vector2.ZERO
 var player_in_range = false
 
-func _ready():
-	var entitiesAtSpawn = $DetectPlayer.get_overlapping_bodies()
-	for entity in entitiesAtSpawn:
-		if entity.is_in_group("Player"):
-			player_in_range = true
-			break
-
 func _physics_process(_delta: float) -> void:
 	
 	if knockback.length() > .1:

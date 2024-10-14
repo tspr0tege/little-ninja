@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://c7wjn8eyaeau7"
-path="res://.godot/imported/woosh 02.wav-7141ab0b89ca4dbc495165472edb9d2f.sample"
+uid="uid://cmu3qqh6ainbm"
+path="res://.godot/imported/Hit.wav-e7e96a57b340c8b7dd0a33c14348643f.sample"
 
 [deps]
 
-source_file="res://weapons/stick/woosh 02.wav"
-dest_files=["res://.godot/imported/woosh 02.wav-7141ab0b89ca4dbc495165472edb9d2f.sample"]
+source_file="res://audio/Hit.wav"
+dest_files=["res://.godot/imported/Hit.wav-e7e96a57b340c8b7dd0a33c14348643f.sample"]
 
 [params]
 

@@ -1,0 +1,80 @@
+[gd_scene load_steps=9 format=3 uid="uid://dg0te1b7nx23i"]
+
+[ext_resource type="Script" path="res://weapons/_common/weapon_swing.gd" id="1_0ja6v"]
+[ext_resource type="Texture2D" uid="uid://cwyc2wsknwkdo" path="res://weapons/sword/SpriteInHand.png" id="2_ubolo"]
+[ext_resource type="PackedScene" uid="uid://dmlmylke10jns" path="res://components/nodes/dmg_node.tscn" id="3_7kpri"]
+[ext_resource type="AudioStream" uid="uid://sat431pcaksq" path="res://weapons/_common/woosh 01.wav" id="4_qjekh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6dx86"]
+size = Vector2(4.12252, 8.24504)
+
+[sub_resource type="Animation" id="Animation_0g7xi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.309]
+}
+
+[sub_resource type="Animation" id="Animation_hxk1p"]
+resource_name = "swing"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.309, -1.309]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f8iph"]
+_data = {
+"RESET": SubResource("Animation_0g7xi"),
+"swing": SubResource("Animation_hxk1p")
+}
+
+[node name="SwordSwing" type="Node2D"]
+script = ExtResource("1_0ja6v")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.309
+texture = ExtResource("2_ubolo")
+offset = Vector2(0, 7.5)
+flip_h = true
+
+[node name="Area2D" type="Area2D" parent="Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_6dx86")
+debug_color = Color(1, 0, 0, 0.419608)
+
+[node name="DMG_node" parent="." instance=ExtResource("3_7kpri")]
+dmgOutput = 5
+knockbackStrength = 150.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_f8iph")
+}
+autoplay = "swing"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_qjekh")
+pitch_scale = 1.48
+autoplay = true
+
+[connection signal="body_entered" from="Sprite2D/Area2D" to="." method="_on_collision_detected"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]

@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://d211gqxjwpq4j"
-path="res://.godot/imported/Explosion3.wav-b119fea6bb1163621ca398db4a1a8bef.sample"
+uid="uid://c7wjn8eyaeau7"
+path="res://.godot/imported/woosh 02.wav-b7c9be3000ca63c3c69e881f950d6ef3.sample"
 
 [deps]
 
-source_file="res://Explosion3.wav"
-dest_files=["res://.godot/imported/Explosion3.wav-b119fea6bb1163621ca398db4a1a8bef.sample"]
+source_file="res://weapons/_common/woosh 02.wav"
+dest_files=["res://.godot/imported/woosh 02.wav-b7c9be3000ca63c3c69e881f950d6ef3.sample"]
 
 [params]
 

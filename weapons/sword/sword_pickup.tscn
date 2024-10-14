@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbqjebixfge4d"]
+
+[ext_resource type="Script" path="res://weapons/sword/sword_pickup.gd" id="1_80i2j"]
+[ext_resource type="Texture2D" uid="uid://cqmid2o52v7hc" path="res://weapons/sword/Sprite.png" id="2_ptf5j"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_67vo1"]
+radius = 9.0
+
+[node name="SwordPickup" type="Node2D" groups=["pickups"]]
+script = ExtResource("1_80i2j")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ptf5j")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_67vo1")
+debug_color = Color(0, 1, 0, 0.419608)
