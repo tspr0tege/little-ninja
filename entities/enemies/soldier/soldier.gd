@@ -45,11 +45,11 @@ func _on_attack_range_triggered(body: Node2D) -> void:
 	if body == PLAYER:
 		in_action = true
 		$AnimatedSprite2D.pause()
-		$AttackAnimationPlayer.play("attack-right")
+		$AttackAnimationPlayer.call_deferred("play", "attack-" + facingDirection)
 
 func _on_animation_finished(_anim_name: StringName) -> void:
 	if $AttackRange.get_overlapping_bodies().has(PLAYER):
-		$AttackAnimationPlayer.play("attack-right")
+		$AttackAnimationPlayer.play("attack-" + facingDirection)
 	else:
 		in_action = false
 
